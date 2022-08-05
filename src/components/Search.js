@@ -3,9 +3,9 @@ import { FaSearch } from 'react-icons/fa'
 
 const Search = () => {
 	return (
-		<div className="mb-10 mr-3">
-			<div className="flex w-full sm:w-96 lg:w-screen max-w-3xl mx-auto  items-center">
-				<div className="flex sm:w-full items-center border-2 rounded-full py-1 md:shadow-sm">
+		<div className="mb-10 w-full flex justify-center">
+			<div className="flex w-full lg:w-screen max-w-3xl items-center">
+				<div className="flex w-full items-center border-2 rounded-full py-1 md:shadow-sm">
 					<FaSearch className="w-8 md:inline-flex h-8 bg-red-400 text-white rounded-full p-2 mx-2" />
 					<input
 						// value={searchInput}
