@@ -13,13 +13,13 @@ const ProductItem = () => {
 
 			<div className="flex h-14 p-3 sm:h-30 sm:mt-20 sm:h-20 w-full justify-evenly items-center ">
 				<button className="w-10 h-full rounded-l-lg">
-					<p className="text-xl">-</p>
+					<p className="text-xl font-bold">-</p>
 				</button>
-				<p className="text-xl p-0.5 sm:p-3 mx-1 h-full border-b-2  text-center flex items-center">
+				<p className="text-xl p-0.5 sm:p-3 mx-1 h-full border-b-2 font-bold  text-center flex items-center">
 					1
 				</p>
 				<button className=" flex justify-center items-center text-center  w-10 h-full rounded-r-lg">
-					<p className="text-xl">+</p>
+					<p className="text-xl font-bold">+</p>
 				</button>
 			</div>
 
