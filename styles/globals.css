@@ -28,8 +28,11 @@ html {
 	li {
 		@apply cursor-pointer;
 	}
+	.clicked{
+		@apply active:scale-95 transition duration-150;
+	}
 	button {
-		@apply shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#79c07b] hover:shadow-xl active:scale-95 transition duration-150;
+		@apply clicked shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#79c07b] hover:shadow-xl ;
 	}
 
 }
