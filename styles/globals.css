@@ -6,10 +6,25 @@ html {
    scroll-behavior: smooth;
 }
 
+
 @layer base {
    body {
-      @apply bg-[#171e27] text-[#F692B2] tracking-wide box-border;
+      @apply bg-[#F8F8F2] text-[#171e27] tracking-wide box-border;
    }
+	h3 {
+		@apply text-lg
+	}
+  .title {
+		@apply truncate whitespace-nowrap overflow-hidden;
+  }
+
+ table tbody {
+	@apply border-solid border-b-8  last:border-b-0 ;
+ }
+
+ hr {
+	@apply  mt-10 border-[1px] bg-black border-black;
+ }
 
    h1,
 	h2,
