@@ -29,7 +29,7 @@ html {
 		@apply cursor-pointer;
 	}
 	button {
-		@apply shadow-sm shadow-gray-400 uppercase text-white;
+		@apply shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#79c07b] hover:shadow-xl active:scale-95 transition duration-150;
 	}
 
 }
