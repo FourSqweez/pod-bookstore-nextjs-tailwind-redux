@@ -1,25 +1,43 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 const ProductCart = () => {
 	// Extracting cart state from redux store
 	const cart = useSelector((state) => state.cart)
+	const [paid, setPaid] = useState(0)
 
 	console.log('Cart Test : ', cart)
 
 	// Reference to the dispatch function from redux store
 	const dispatch = useDispatch()
 
+	const handlePaid = (e) => {
+		setPaid(e.target.value)
+	}
+
 	const getTotalPrice = () => {
-		return cart.reduce(
-			(accumulator, item) => accumulator + item.quantity * item.price,
-			0
-		)
+		return cart
+			.reduce(
+				(accumulator, item) => accumulator + item.quantity * item.price,
+				0
+			)
+			.toFixed(2)
+	}
+	const getDiscount = () => {
+		return 100
+	}
+
+	const getSummary = () => {
+		return getTotalPrice() - getDiscount().toFixed(2)
+	}
+
+	const getChang = () => {
+		return (paid - getSummary()).toFixed(2)
 	}
 
 	return (
-		<div className="max-w-7xl mx-auto">
+		<div className="max-w-7xl mx-auto mb-10">
 			{cart.length === 0 ? (
 				<h1>Your Cart is Empty!</h1>
 			) : (
@@ -57,28 +75,23 @@ const ProductCart = () => {
 											<div className="w-10 text-center">1</div>
 										</div>
 									</div>
-
-									<div className="flex justify-between ">
-										<div className="flex flex-col items-end gap-2 w-full pr-3">
-											<h3 className="">Special Discount : </h3>
-											<h3 className=" ">Summary : </h3>
-											<h3 className="">Paid : </h3>
-											<h3 className=" ">Change : </h3>
-										</div>
-										<div className="flex flex-col items-end gap-2 w-auto mr-3">
-											<h3>40</h3>
-											<h3>560</h3>
-											<input
-												className="w-20 px-2 rounded-sm"
-												type="text"
-											/>
-											<h3>440</h3>
-										</div>
-									</div>
 								</div>
 							))}
-
 						{/* end loop */}
+						<div className="flex justify-between ">
+							<div className="flex flex-col items-end gap-2 w-full pr-3">
+								<h3 className="">Special Discount : </h3>
+								<h3 className=" ">Summary : </h3>
+								<h3 className="">Paid : </h3>
+								<h3 className=" ">Change : </h3>
+							</div>
+							<div className="flex flex-col items-end gap-2 w-auto mr-3">
+								<h3>40</h3>
+								<h3>560</h3>
+								<input className="w-20 px-2 rounded-sm" type="text" />
+								<h3>440</h3>
+							</div>
+						</div>
 						<div className="flex justify-end mt-3 ">
 							<button className="rounded-md px-6 py-1.5">
 								Checkout
@@ -133,7 +146,7 @@ const ProductCart = () => {
 													<h4>{item.quantity}</h4>
 												</td>
 												<td className="">
-													<h4>{getTotalPrice()}</h4>
+													<h4>{item.quantity * item.price}</h4>
 												</td>
 												<td className="left-0">
 													<h4>Delete</h4>
@@ -143,11 +156,40 @@ const ProductCart = () => {
 									</>
 								))}
 						</table>
+
 						<hr />
+
+						<div className="flex justify-between">
+							<div className="flex flex-col items-end gap-2 w-full pr-12">
+								<h3 className="text-2xl">Total : </h3>
+								<h3 className="text-2xl">Special Discount : </h3>
+								<h3 className="text-2xl">Summary : </h3>
+								<h3 className="text-2xl">Paid : </h3>
+								<h3 className="text-2xl">Change : </h3>
+							</div>
+							<div className="flex flex-col items-end gap-2 w-auto mr-3">
+								<h3 className="text-2xl">{getTotalPrice()}</h3>
+								<h3 className="text-2xl">{getDiscount()}</h3>
+								<h3 className="text-2xl">{getSummary()}</h3>
+								<input
+									onChange={handlePaid}
+									className="w-24 px-2 rounded-sm border-2 border-gray-400"
+									type="text"
+								/>
+								<h3 className="text-2xl">
+									{paid === 0 ? 0 : getChang()}
+								</h3>
+							</div>
+						</div>
+
+						<div className="flex justify-end mt-3 ">
+							<button className="rounded-md px-6 py-1.5">
+								Checkout
+							</button>
+						</div>
 					</div>
 				</>
 			)}
-			{/* mobile */}
 		</div>
 	)
 }
