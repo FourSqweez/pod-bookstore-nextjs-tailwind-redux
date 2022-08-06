@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Products from '../src/components/Products'
+import ProductsFeed from '../src/components/ProductsFeed'
 import { getBooksAPI, getPromotionsAPI } from './api/booksApi'
 
 export default function Home({ books, promotions }) {
@@ -14,7 +14,7 @@ export default function Home({ books, promotions }) {
 			</Head>
 
 			<main className="mt-5 flex flex-col justify-center items-center">
-				<Products books={books} />
+				<ProductsFeed books={books} />
 			</main>
 		</div>
 	)
