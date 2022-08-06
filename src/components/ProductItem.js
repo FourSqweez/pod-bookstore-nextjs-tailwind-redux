@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
-import { addToCart } from '../slices/cartSlice'
+import { addToCart } from '../app/slices/cartSlice' 
 
 const ProductItem = ({ product }) => {
 	const dispatch = useDispatch()
