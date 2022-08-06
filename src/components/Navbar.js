@@ -17,8 +17,8 @@ const MyButtonHome = React.forwardRef(({ onClick, href }, ref) => {
 
 const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 	return (
-		<a href={href} onClick={onClick} ref={ref}>
-			<CardIcon className="w-28 h-12" />
+		<a href={href} onClick={onClick} ref={ref} className="w-full">
+			<CardIcon className="w-full h-full" />
 		</a>
 	)
 })
@@ -34,13 +34,13 @@ const Navbar = () => {
 					<MyButtonHome />
 				</Link>
 			</div>
-			<div className="w-full">
+			<div className="w-full mx-3">
 				{router && router.asPath == '/checkout' ? '' : <Search />}
 			</div>
 
 			<div className="relative clicked h-full mr-2 sm:mr-10 flex w-16 cursor-pointer">
-				<span className="absolute bottom-1 right-2  h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
-					{/* {items.length} */} 4
+				<span className="absolute bottom-1 right-0  h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
+					4
 				</span>
 				<Link href="/checkout" passHref>
 					<CartButton />
