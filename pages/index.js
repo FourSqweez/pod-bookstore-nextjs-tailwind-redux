@@ -14,7 +14,7 @@ export default function Home({ books }) {
 			</Head>
 
 			<main className="mt-5 flex flex-col justify-center items-center">
-				<Products />
+				<Products books={books}/>
 			</main>
 		</div>
 	)
