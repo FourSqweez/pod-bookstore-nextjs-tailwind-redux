@@ -3,6 +3,7 @@ import Search from './Search'
 import { MdShoppingCart as CardIcon } from 'react-icons/md'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
 
 const MyButtonHome = React.forwardRef(({ onClick, href }, ref) => {
 	return (
@@ -25,6 +26,7 @@ const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 
 const Navbar = () => {
 	const router = useRouter()
+	const cart = useSelector((state) => state.cart)
 	console.log('Router :', router.asPath)
 
 	return (
@@ -40,7 +42,7 @@ const Navbar = () => {
 
 			<div className="relative clicked h-full mr-2 sm:mr-10 flex w-16 cursor-pointer">
 				<span className="absolute bottom-1 right-0  h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
-					4
+					{cart.length === 0 ? 0 : cart.map(item => item.quantity)}
 				</span>
 				<Link href="/checkout" passHref>
 					<CartButton />
