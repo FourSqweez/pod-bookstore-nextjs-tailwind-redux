@@ -59,7 +59,7 @@ const Checkout = () => {
 					</p>
 				</div>
 
-				<table class="table-auto text-left">
+				<table className="table-auto text-left">
 					<thead>
 						<tr>
 							<th className="w-40">Product</th>
@@ -69,7 +69,7 @@ const Checkout = () => {
 							<th className="w-16"></th>
 						</tr>
 					</thead>
-					<tbody className="">
+					<tbody>
 						<tr>
 							<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
 								<img src="" className="w-20 h-20" alt="" />
