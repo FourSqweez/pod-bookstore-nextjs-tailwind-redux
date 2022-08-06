@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Products from '../src/components/Products'
-import { getBooksAPI } from './api/booksApi'
+import { getBooksAPI, getPromotionsAPI } from './api/booksApi'
 
-export default function Home({ books }) {
-	console.log('test books : ', books)
+export default function Home({ books, promotions }) {
+	console.log('test promotions : ', promotions)
 
 	return (
 		<div className="mx-1 sm:mx-10">
@@ -14,20 +14,21 @@ export default function Home({ books }) {
 			</Head>
 
 			<main className="mt-5 flex flex-col justify-center items-center">
-				<Products books={books}/>
+				<Products books={books} />
 			</main>
 		</div>
 	)
 }
 
 export async function getServerSideProps() {
-	const res = await getBooksAPI()
-	const data = await res.data
-	console.log('Data : ', data)
+	const booksData = await getBooksAPI().then((res) => res.data)
+	const promotionsData = await getPromotionsAPI().then((res) => res.data)
+	console.log('promotionsData : ', promotionsData)
 
 	return {
 		props: {
-			books: data,
+			books: booksData,
+			promotions: promotionsData,
 		},
 	}
 }
