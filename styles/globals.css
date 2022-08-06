@@ -9,7 +9,7 @@ html {
 
 @layer base {
    body {
-      @apply bg-[#F8F8F2] text-[#171e27] tracking-wide box-border;
+      @apply bg-[#fafaf1] text-[#171e27] tracking-wide box-border;
    }
 	h3 {
 		@apply text-lg
@@ -47,7 +47,7 @@ html {
 		@apply active:scale-95 transition duration-150;
 	}
 	button {
-		@apply clicked shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#79c07b] hover:shadow-xl ;
+		@apply clicked shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#94ed97] hover:shadow-xl ;
 	}
 
 }
