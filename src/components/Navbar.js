@@ -3,6 +3,26 @@ import Search from './Search'
 import { MdShoppingCart as CardIcon } from 'react-icons/md'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+const MyButtonHome = React.forwardRef(({ onClick, href }, ref) => {
+	return (
+		<a href={href} onClick={onClick} ref={ref}>
+			<div>
+				<h3 className="text-2xl">Little Brown</h3>
+				<h3 className="text-2xl">Book Shop.</h3>
+			</div>
+		</a>
+	)
+})
+
+const CartButton = React.forwardRef(({ onClick, href }, ref) => {
+	return (
+		<a href={href} onClick={onClick} ref={ref}>
+			<CardIcon className="w-28 h-12" />
+		</a>
+	)
+})
+
 const Navbar = () => {
 	const router = useRouter()
 	console.log('Router :', router.asPath)
@@ -10,11 +30,8 @@ const Navbar = () => {
 	return (
 		<div className="flex w-full mt-5">
 			<div className="hidden sm:flex pl-10 mb-3 w-48 whitespace-nowrap cursor-pointer">
-				<Link href="/">
-					<div>
-						<h3 className="text-2xl">Little Brown</h3>
-						<h3 className="text-2xl">Book Shop.</h3>
-					</div>
+				<Link href="/" passHref>
+					<MyButtonHome />
 				</Link>
 			</div>
 			<div className="w-full">
@@ -25,8 +42,8 @@ const Navbar = () => {
 				<span className="absolute bottom-1 right-2  h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
 					{/* {items.length} */} 4
 				</span>
-				<Link href="/checkout">
-					<CardIcon className="w-28 h-12" />
+				<Link href="/checkout" passHref>
+					<CartButton />
 				</Link>
 			</div>
 		</div>
