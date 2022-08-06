@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Navbar from '../src/components/Navbar'
 import Products from '../src/components/Products'
 import { getBooksAPI } from './api/booksApi'
 
@@ -15,7 +14,6 @@ export default function Home({ books }) {
 			</Head>
 
 			<main className="mt-5 flex flex-col justify-center items-center">
-				<Navbar />
 				<Products />
 			</main>
 		</div>
@@ -26,15 +24,13 @@ export async function getServerSideProps() {
 	const res = await getBooksAPI()
 	const data = await res.data
 	console.log('Data : ', data)
-		
+
 	return {
 		props: {
-			books: data
+			books: data,
 		},
 	}
 }
-
-
 
 // const response = await (
 // 	await fetch('http://localhost:8000/books', {
