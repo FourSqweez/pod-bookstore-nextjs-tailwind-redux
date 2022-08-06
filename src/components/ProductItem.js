@@ -10,6 +10,7 @@ const ProductItem = ({ book }) => {
 					layout="fill"
 					alt=""
 					objectFit="inherit"
+					priority
 				/>
 			</div>
 			<div className="flex px-2 flex-col justify-end sm:mb-0 sm:w-full ">
