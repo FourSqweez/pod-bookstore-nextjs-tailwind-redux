@@ -1,10 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../slices/cartSlice'
 
 const ProductItem = ({ product }) => {
+	const dispatch = useDispatch()
+
+	const addProductItemToCart = () => {
+		dispatch(addToCart(product))
+	}
+
 	return (
 		<div className="w-40 h-full border-2 hover:border-[#F692B2] bg-[#ffd580] sm:w-48 sm:h-full overflow-hidden rounded-xl hover:opacity-100 hover:shadow-slate-200 hover:shadow-lg hover:scale-110 duration-200 ease-ou">
-			<div className="h-52 w-full sm:h-60 sm:w-full relative  overflow-hidden rounded-t-xl">
+			<div className="h-52 w-full sm:h-60 sm:w-full relative overflow-hidden rounded-t-xl">
 				<Image
 					src={product.images.jpeg}
 					layout="fill"
@@ -37,7 +45,10 @@ const ProductItem = ({ product }) => {
 				</button>
 			</div>
 
-			<button className="p-0.5 mt-2 sm:mt-0 sm:p-2 rounded-md w-full sm:h-10 bg-[#aff892]">
+			<button
+				onClick={addProductItemToCart}
+				className="p-0.5 mt-2 sm:mt-0 sm:p-2 rounded-md w-full sm:h-10 bg-[#aff892]"
+			>
 				<p className="text-[11px] sm:text-lg text-[#212b38]">Add to cart</p>
 			</button>
 		</div>
