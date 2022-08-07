@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { calculateDiscountHelper } from './libs/promotionHelper'
 
 const ProductCart = () => {
 	const [paid, setPaid] = useState(0)
@@ -9,24 +8,58 @@ const ProductCart = () => {
 	// Extracting cart state from redux store
 	const cart = useSelector((state) => state.cart)
 	const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
-
+	const booksCartId = cart.map((book) => book.id)
+	const promotions = useSelector((state) => state.promotions)
+	const promotion = promotions.map((p) => p)
+	const promotion1Id = promotion.map((p) => p[0].id)
 	const totalAmounts = quantity.reduce(
 		(accumulator, amount) => accumulator + amount,
 		0
 	)
-	console.log(`Total amount : ${totalAmounts}`)
+	const promotionHarryId = promotion.map((p) => p[0].id).toString()
+	// const promotion4Free1Id = promotion.map((p) => p[1].id).toString()
+	const [promotionHarryBookTargetIds] = promotion.map((p) => p[0].targetIds)
+	// const [promotion4Free1BookTargetIds] = promotion.map((p) => p[1].targetIds)
+	const productIntersectionPromotionHarry = booksCartId.filter((x) =>
+		promotionHarryBookTargetIds.includes(x)
+	)
 
-	console.log('quantity ', quantity)
+	// const productIntersectionPromotion4Free1 = booksCartId.filter((x) =>
+	// 	promotion4Free1BookTargetIds.includes(x)
+	// )
 
-	const promotions = useSelector((state) => state.promotions)
-	//console.log('promotion ', promotions)
+	// console.log(`Total amount : ${totalAmounts}`)
 
-	//console.log('Cart Test : ', cart)
+	// console.log('quantity ', quantity)
 
-	const booksCartId = cart.map((book) => book.id)
-	console.log('bookId :', booksCartId)
+	// //console.log('promotion ', promotions)
+
+	// //console.log('Cart Test : ', cart)
+
+	// //console.log('promotion', promotion)
+
+	// console.log('booksCartId :', booksCartId)
+
+	//console.log('promotionId', promotion1Id)
 
 	//console.log('TargetId : ',targetIds)
+
+	// console.log('promotionHarryId : ', promotionHarryId)
+
+	// console.log('promotion4Free1Id : ', promotion4Free1Id)
+
+	// console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+
+	// console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+	// console.log(
+	// 	'productIntersectionPromotionHarry: ',
+	// 	productIntersectionPromotionHarry
+	// )
+
+	// console.log(
+	// 	'productIntersectionPromotion4Free1: ',
+	// 	productIntersectionPromotion4Free1
+	// )
 
 	const handlePaid = (e) => {
 		setPaid(e.target.value)
@@ -42,8 +75,41 @@ const ProductCart = () => {
 	}
 
 	const getDiscount = () => {
-		return calculateDiscountHelper(promotions, booksCartId)
+		if (booksCartId.length != 0) {
+			if (promotionHarryId === '9001') {
+				console.log(' calculateHarry')
+				if (productIntersectionPromotionHarry) {
+					const discount = 0
+					switch (productIntersectionPromotionHarry.length) {
+						case 2:
+							discount = 10
+							break
+						case 3:
+							discount = 11
+							break
+						case 4:
+							discount = 12
+							break
+						case 5:
+							discount = 13
+							break
+						case 6:
+							discount = 14
+							break
+						case 7:
+							discount = 15
+							break
+						default:
+							discount = 0
+					}
+					return discount
+				}
+			}
+		}
+		return 0
 	}
+
+	// const get4Free1 = () => {}
 
 	const getSummary = () => {
 		return (

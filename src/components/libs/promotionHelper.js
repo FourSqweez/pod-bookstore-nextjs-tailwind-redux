@@ -1,88 +1,68 @@
-export const calculateDiscountHelper = (promotions, booksCartId) => {
-	const promotion = promotions.map((p) => p)
-	//console.log('promotion', promotion)
+import { useSelector } from 'react-redux'
 
-	const promotion1Id = promotion.map((p) => p[0].id)
-	//console.log('promotionId', promotion1Id)
+const state = store.getState()
 
-	const promotionHarryType = promotion.map((p) => p[0].type)
-	const promotion4Free1Type = promotion.map((p) => p[1].type)
+const promotions = useSelector((state) => state.promotions)
+//console.log('promotion ', promotions)
+// export const calculateDiscountHelper = (promotions, booksCartId) => {
+const cart = useSelector((state) => state.cart)
+const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
+//console.log('Cart Test : ', cart)
 
-	console.log('promotionHarryType : ', promotionHarryType)
+const booksCartId = cart.map((book) => book.id)
+console.log('bookId :', booksCartId)
 
-	//let union = [...new Set([...arrA, ...arrB)];
+const totalAmounts = quantity.reduce(
+	(accumulator, amount) => accumulator + amount,
+	0
+)
+console.log(`Total amount : ${totalAmounts}`)
 
-	const promotionTypeUnion = [
-		...new Set([...promotionHarryType, ...promotion4Free1Type]),
-	]
-	console.log('promotionTypeUnion :', promotionTypeUnion)
+console.log('quantity ', quantity)
 
-	console.log('promotion4Free1Type : ', promotion4Free1Type)
+const promotion = promotions.map((p) => p)
 
-	const [promotionHarryBookTargetIds] = promotion.map((p) => p[0].targetIds)
-	console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+//console.log('promotion', promotion)
 
-	const [promotion4Free1BookTargetIds] = promotion.map((p) => p[1].targetIds)
-	console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+console.log('booksCartId :', booksCartId)
 
-	// const [pTargetId] = promotionHarryBookTargetIds
-	// console.log('pTargetId : ', pTargetId)
+const promotion1Id = promotion.map((p) => p[0].id)
+//console.log('promotionId', promotion1Id)
 
-	const productIntersectionPromotionHarry = booksCartId.filter((x) =>
-		promotionHarryBookTargetIds.includes(x)
-	)
-	console.log(
-		'productIntersectionPromotionHarry: ',
-		productIntersectionPromotionHarry
-	)
+export const promotionHarryId = promotion.map((p) => p[0].id).toString()
+export const promotion4Free1Id = promotion.map((p) => p[1].id).toString()
 
-	const productIntersectionPromotion4Free1 = booksCartId.filter((x) =>
-		promotion4Free1BookTargetIds.includes(x)
-	)
-	console.log(
-		'productIntersectionPromotion4Free1: ',
-		productIntersectionPromotion4Free1
-	)
+console.log('promotionHarryId : ', promotionHarryId)
 
-	if (booksCartId.length > 1) {
-		if (promotionTypeUnion[1] === '4_FREE_1') {
-			if (productIntersectionPromotion4Free1.length % 4 === 0) {
-				return console.log(
-					`productIntersectionPromotion4Free1: = ${productIntersectionPromotion4Free1.length} Free 1 `
-				)
-			}
-			return console.log(
-				`productIntersectionPromotion4Free1: = ${productIntersectionPromotion4Free1.length} buy more ${productIntersectionPromotion4Free1.length - 4} to Free 1 `
-			)
-		}
-		if (promotionTypeUnion[0] === 'MULTI_HARRY') {
-			const discount = 0
-			switch (productIntersectionPromotionHarry.length) {
-				case 2:
-					discount = 10
-					break
-				case 3:
-					discount = 11
-					break
-				case 4:
-					discount = 12
-					break
-				case 5:
-					discount = 13
-					break
-				case 6:
-					discount = 14
-					break
-				case 7:
-					discount = 15
-					break
-				default:
-					discount = 8
-			}
-			return discount
-		}
-		return 8
-	}
+console.log('promotion4Free1Id : ', promotion4Free1Id)
 
-	return 8
-}
+export const [promotionHarryBookTargetIds] = promotion.map(
+	(p) => p[0].targetIds
+)
+console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+
+export const [promotion4Free1BookTargetIds] = promotion.map(
+	(p) => p[1].targetIds
+)
+console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+
+// const [pTargetId] = promotionHarryBookTargetIds
+// console.log('pTargetId : ', pTargetId)
+
+export const productIntersectionPromotionHarry = booksCartId.filter((x) =>
+	promotionHarryBookTargetIds.includes(x)
+)
+console.log(
+	'productIntersectionPromotionHarry: ',
+	productIntersectionPromotionHarry
+)
+
+export const productIntersectionPromotion4Free1 = booksCartId.filter((x) =>
+	promotion4Free1BookTargetIds.includes(x)
+)
+console.log(
+	'productIntersectionPromotion4Free1: ',
+	productIntersectionPromotion4Free1
+)
+
+// }
