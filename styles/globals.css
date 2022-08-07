@@ -23,7 +23,7 @@ html {
  }
 
  hr {
-	@apply  mt-10 border-[1px] bg-black border-black;
+	@apply  my-5 border-[1px] bg-black border-black;
  }
 
    h1,
