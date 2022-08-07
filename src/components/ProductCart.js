@@ -1,13 +1,49 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { promotionHelper } from './libs/promotionHelper'
 
 const ProductCart = () => {
-	// Extracting cart state from redux store
-	const cart = useSelector((state) => state.cart)
 	const [paid, setPaid] = useState(0)
 
-	console.log('Cart Test : ', cart)
+	// Extracting cart state from redux store
+	const cart = useSelector((state) => state.cart)
+	const promotions = useSelector((state) => state.promotions)
+	//console.log('promotion ', promotions)
+
+	//console.log('Cart Test : ', cart)
+
+	const booksId = cart.map((book) => book.id)
+	console.log('bookId :', booksId)
+
+	const promotion = promotions.map((p) => p)
+	console.log('promotion', promotion)
+
+	const promotion1Id = promotion.map((p) => p[0].id)
+	console.log('promotionId', promotion1Id)
+
+	const promotionHarryType = promotion.map((p) => p[0].type)
+	console.log('promotionHarryType : ', promotionHarryType.toString())
+	const promotion4Free1Type = promotion.map((p) => p[1].type)
+	console.log('promotion4Free1Type : ', promotionHarryType.toString())
+
+	const promotionHarryBookTargetIds = promotion.map((p) => p[0].targetIds)
+	console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+
+	//console.log('TargetId : ',targetIds)
+
+	// const test = () => {
+
+	// 	if (promotions) {
+	// 		if (promotionId === 9001) {
+	// 			const array1 = [1, 2, 3, 5, 9]
+	// 			const array2 = [1, 3, 5, 8]
+	// 			// const bookIntersection = performIntersection
+	// 		}
+	// 	}
+	// }
+
+	// test()
 
 	// Reference to the dispatch function from redux store
 	const dispatch = useDispatch()
@@ -24,8 +60,9 @@ const ProductCart = () => {
 			)
 			.toFixed(2)
 	}
+
 	const getDiscount = () => {
-		return 100
+		return 0
 	}
 
 	const getSummary = () => {
@@ -60,7 +97,7 @@ const ProductCart = () => {
 													alt=""
 													objectFit="inherit"
 													priority
-													src={item.images}
+													src={item.images.jpeg}
 												/>
 											</div>
 											<div className="w-64 xs:w-[24rem] sm:w-[28rem]">
@@ -119,41 +156,39 @@ const ProductCart = () => {
 							</thead>
 							{cart &&
 								cart.map((item) => (
-									<>
-										<tbody>
-											<tr>
-												<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
-													<div className="h-full w-full sm:h-32 sm:w-32 relative  overflow-hidden rounded-xl">
-														<Image
-															src={item.images.jpeg}
-															layout="fill"
-															alt=""
-															objectFit="inherit"
-															priority
-														/>
-													</div>
-													<h4
-														className="w-full pl-2 items-center title"
-														title={item.title}
-													>
-														{item.title}
-													</h4>
-												</td>
-												<td>
-													<h4>{item.price}</h4>
-												</td>
-												<td>
-													<h4>{item.quantity}</h4>
-												</td>
-												<td className="">
-													<h4>{item.quantity * item.price}</h4>
-												</td>
-												<td className="left-0">
-													<h4>Delete</h4>
-												</td>
-											</tr>
-										</tbody>
-									</>
+									<tbody key={item.id}>
+										<tr>
+											<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
+												<div className="h-full w-full sm:h-32 sm:w-32 relative  overflow-hidden rounded-xl">
+													<Image
+														src={item.images.jpeg}
+														layout="fill"
+														alt=""
+														objectFit="inherit"
+														priority
+													/>
+												</div>
+												<h4
+													className="w-full pl-2 items-center title"
+													title={item.title}
+												>
+													{item.title}
+												</h4>
+											</td>
+											<td>
+												<h4>{item.price}</h4>
+											</td>
+											<td>
+												<h4>{item.quantity}</h4>
+											</td>
+											<td className="">
+												<h4>{item.quantity * item.price}</h4>
+											</td>
+											<td className="left-0">
+												<h4>Delete</h4>
+											</td>
+										</tr>
+									</tbody>
 								))}
 						</table>
 
