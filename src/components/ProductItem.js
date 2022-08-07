@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
-import { useDispatch } from 'react-redux'
-import { addToCart } from '../app/slices/cartSlice' 
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCart } from '../app/slices/cartSlice'
 
 const ProductItem = ({ product }) => {
+	const cart = useSelector((state) => state.cart)
 	const dispatch = useDispatch()
-
 	const addProductItemToCart = () => {
 		dispatch(addToCart(product))
 	}
