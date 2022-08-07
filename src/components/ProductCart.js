@@ -1,52 +1,32 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { promotionHelper } from './libs/promotionHelper'
+import { useSelector } from 'react-redux'
+import { calculateDiscountHelper } from './libs/promotionHelper'
 
 const ProductCart = () => {
 	const [paid, setPaid] = useState(0)
 
 	// Extracting cart state from redux store
 	const cart = useSelector((state) => state.cart)
+	const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
+
+	const totalAmounts = quantity.reduce(
+		(accumulator, amount) => accumulator + amount,
+		0
+	)
+	console.log(`Total amount : ${totalAmounts}`)
+
+	console.log('quantity ', quantity)
+
 	const promotions = useSelector((state) => state.promotions)
 	//console.log('promotion ', promotions)
 
 	//console.log('Cart Test : ', cart)
 
-	const booksId = cart.map((book) => book.id)
-	console.log('bookId :', booksId)
-
-	const promotion = promotions.map((p) => p)
-	console.log('promotion', promotion)
-
-	const promotion1Id = promotion.map((p) => p[0].id)
-	console.log('promotionId', promotion1Id)
-
-	const promotionHarryType = promotion.map((p) => p[0].type)
-	console.log('promotionHarryType : ', promotionHarryType.toString())
-	const promotion4Free1Type = promotion.map((p) => p[1].type)
-	console.log('promotion4Free1Type : ', promotionHarryType.toString())
-
-	const promotionHarryBookTargetIds = promotion.map((p) => p[0].targetIds)
-	console.log('promotionHarryBookTargetId: ', promotionHarryBookTargetIds)
+	const booksCartId = cart.map((book) => book.id)
+	console.log('bookId :', booksCartId)
 
 	//console.log('TargetId : ',targetIds)
-
-	// const test = () => {
-
-	// 	if (promotions) {
-	// 		if (promotionId === 9001) {
-	// 			const array1 = [1, 2, 3, 5, 9]
-	// 			const array2 = [1, 3, 5, 8]
-	// 			// const bookIntersection = performIntersection
-	// 		}
-	// 	}
-	// }
-
-	// test()
-
-	// Reference to the dispatch function from redux store
-	const dispatch = useDispatch()
 
 	const handlePaid = (e) => {
 		setPaid(e.target.value)
@@ -62,11 +42,14 @@ const ProductCart = () => {
 	}
 
 	const getDiscount = () => {
-		return 0
+		return calculateDiscountHelper(promotions, booksCartId)
 	}
 
 	const getSummary = () => {
-		return getTotalPrice() - getDiscount().toFixed(2)
+		return (
+			getTotalPrice() -
+			(getTotalPrice() * getDiscount()) / 100
+		).toFixed(2)
 	}
 
 	const getChang = () => {
@@ -204,7 +187,7 @@ const ProductCart = () => {
 							</div>
 							<div className="flex flex-col items-end gap-2 w-auto mr-3">
 								<h3 className="text-2xl">{getTotalPrice()}</h3>
-								<h3 className="text-2xl">{getDiscount()}</h3>
+								<h3 className="text-2xl">{getDiscount()}%</h3>
 								<h3 className="text-2xl">{getSummary()}</h3>
 								<input
 									onChange={handlePaid}
