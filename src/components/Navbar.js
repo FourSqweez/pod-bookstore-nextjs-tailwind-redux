@@ -28,6 +28,15 @@ const Navbar = () => {
 	const router = useRouter()
 	const cart = useSelector((state) => state.cart)
 	console.log('Router :', router.asPath)
+	const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
+
+	const totalAmounts = quantity.reduce(
+		(accumulator, amount) => accumulator + amount,
+		0
+	)
+	console.log(`Total amount : ${totalAmounts}`)
+
+	console.log('quantity ', quantity)
 
 	return (
 		<div className="flex w-full mt-5">
@@ -42,7 +51,7 @@ const Navbar = () => {
 
 			<div className="relative clicked h-full mr-2 sm:mr-10 flex w-16 cursor-pointer">
 				<span className="absolute bottom-1 right-0  h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
-					{cart.length === 0 ? 0 : cart.map(item => item.quantity)}
+					{totalAmounts === 0 ? 0 : totalAmounts}
 				</span>
 				<Link href="/checkout" passHref>
 					<CartButton />
