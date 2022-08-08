@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { MdDeleteForever } from 'react-icons/md'
 
 const ProductCart = () => {
 	const [paid, setPaid] = useState(0)
@@ -138,9 +139,9 @@ const ProductCart = () => {
 						{cart &&
 							cart.map((item) => (
 								<div key={item.id}>
-									<div className="flex justify-between h-20 items-center last:border-b-black border-b-2 last:mb-5 md:border-none">
+									<div className="flex justify-between h-20 items-center last:mb-5 md:border-none">
 										<div className="flex w-full h-full items-center ml-2 mr-1">
-											<div className="mr-2">
+											<div className="mr-2 h-full w-20 sm:h-full relative  overflow-hidden rounded-md">
 												<Image
 													layout="fill"
 													alt=""
@@ -150,20 +151,25 @@ const ProductCart = () => {
 												/>
 											</div>
 											<div className="w-64 xs:w-[24rem] sm:w-[28rem]">
-												<h4 className="title" title="blaaaaa">
+												<h4 className="title" title={item.title}>
 													{item.title}
 												</h4>
 												<h4>{item.price}</h4>
 											</div>
 										</div>
 										<div>
-											<div className="w-10 text-center">dd</div>
-											<div className="w-10 text-center">1</div>
+											<div className="w-10 sm:w-20 sm:h-full text-center ">
+												<MdDeleteForever className="w-full h-12" />
+											</div>
+											<div className="w-full h-full text-xl font-bold text-center ">
+												{item.quantity}
+											</div>
 										</div>
 									</div>
 								</div>
 							))}
 						{/* end loop */}
+						<hr />
 						<div className="flex justify-between ">
 							<div className="flex flex-col items-end gap-2 w-full pr-3">
 								<h3 className="">Special Discount : </h3>
@@ -186,7 +192,7 @@ const ProductCart = () => {
 					</div>
 
 					{/* desktop */}
-					<div className="hidden md:flex flex-col mx-10 mt-10 ">
+					<div className="hidden md:flex flex-col mx-10 mt-10">
 						<div className="w-full">
 							<p className="underline font-bold  text-3xl mb-5 ">
 								Cart Summary
@@ -196,11 +202,11 @@ const ProductCart = () => {
 						<table className="table-auto text-left">
 							<thead>
 								<tr>
-									<th className="w-40">Product</th>
-									<th className="w-24">Price</th>
-									<th className="w-24">Amount</th>
-									<th className="w-24">Total Price</th>
-									<th className="w-16"></th>
+									<th className="w-24 text-xl">Product</th>
+									<th className="w-24 text-xl">Price</th>
+									<th className="w-24 text-xl">Amount</th>
+									<th className="w-26 text-xl">Total Price</th>
+									<th className="w-16 text-xl"></th>
 								</tr>
 							</thead>
 							{cart &&
@@ -208,7 +214,7 @@ const ProductCart = () => {
 									<tbody key={item.id}>
 										<tr>
 											<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
-												<div className="h-full w-full sm:h-32 sm:w-32 relative  overflow-hidden rounded-xl">
+												<div className="h-36 w-40 text-2xl relative  overflow-hidden rounded-xl">
 													<Image
 														src={item.images.jpeg}
 														layout="fill"
@@ -218,23 +224,27 @@ const ProductCart = () => {
 													/>
 												</div>
 												<h4
-													className="w-full pl-2 items-center title"
+													className="w-full pl-2 items-center title text-2xl"
 													title={item.title}
 												>
 													{item.title}
 												</h4>
 											</td>
 											<td>
-												<h4>{item.price}</h4>
+												<h4 className="text-xl">{item.price}</h4>
 											</td>
 											<td>
-												<h4>{item.quantity}</h4>
+												<h4 className="text-xl">{item.quantity}</h4>
 											</td>
 											<td className="">
-												<h4>{item.quantity * item.price}</h4>
+												<h4 className="text-xl">
+													{item.quantity * item.price}
+												</h4>
 											</td>
 											<td className="left-0">
-												<h4>Delete</h4>
+												<h4>
+													<MdDeleteForever className="w-full h-36" />
+												</h4>
 											</td>
 										</tr>
 									</tbody>
