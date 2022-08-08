@@ -18,7 +18,7 @@ const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 	return (
 		<div
 			onClick={onClick}
-			className="relative clicked h-full mr-2 sm:mr-10 flex w-16 cursor-pointer"
+			className="relative clicked h-full mr-2 sm:mr-10 flex w-16 cursor-pointer "
 		>
 			<span className="absolute bottom-1 right-1 h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
 				{totalAmounts === 0 ? 0 : totalAmounts}
@@ -36,8 +36,8 @@ const Navbar = () => {
 	console.log('Router :', router.asPath)
 
 	return (
-		<div className="flex h-full w-full mt-5 justify-between items-center">
-			<div className="hidden sm:flex pl-10 mb-3 w-48 whitespace-nowrap cursor-pointer">
+		<div className="flex h-16 w-full mt-5 mb-7 sm:justify-between items-center justify-end">
+			<div className="hidden sm:flex ml-10 whitespace-nowrap cursor-pointer">
 				<Link href="/" passHref>
 					<h3 className="text-2xl">
 						Little Brown <br /> Book Shop.
