@@ -12,7 +12,7 @@ const SearchInput = () => {
 	}
 
 	useEffect(() => {
-		router.push(
+		router.replace(
 			{
 				pathname: '/',
 				query: {
