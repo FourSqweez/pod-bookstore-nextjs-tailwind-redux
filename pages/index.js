@@ -12,29 +12,12 @@ export default function Home({ books, promotions }) {
 	const dispatch = useDispatch()
 	const [newBook, setNewBook] = useState([])
 
-	const a = 'Harry is find'
-	const b = a.toLowerCase()
-
-	console.log('Test : ', b)
-	console.log('Book quantity : ', newBook.length)
-
 	useEffect(() => {
 		if (searchInput) {
 			const filterResult = books.filter((book) =>
 				new RegExp(searchInput, 'i').test(book.title)
 			)
 			setNewBook(filterResult)
-
-			// const caseSensitive = /[^A-Za-z0-9_.]/
-			// const search = `/${searchInput}/gi` // true or false
-			// book.title.match(`/${searchInput}/gi`)
-			//const bookCaseInSensitive = /[^A-Za-z0-9_.]/.test(filterResult)
-			// console.log('typing :', searchInput)
-			// console.log('Search:', `/${searchInput}/gi`)
-			// console.log('Search-2:', /`${searchInput}`/gi)
-			// console.log('Hard Search:', /harry/gi)
-			// console.log('filterResult : ', filterResult)
-			// console.log('Case sensitive : ', caseSensitive)
 		} else if (searchInput === '' || searchInput === undefined) {
 			setNewBook([])
 		}
