@@ -1,34 +1,28 @@
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 
 const SearchInput = () => {
 	const router = useRouter()
 	const [searchInput, setSearchInput] = useState('')
 
-	const handleChang = async (e) => {
+	const handleChang = (e) => {
 		e.preventDefault()
 		setSearchInput(e.target.value)
-		await router.push({
-			pathname: '/',
-			query: {
-				searchInput,
-				setSearchInput,
-			},
-		})
 	}
 
-	const handleKeyPress = (e) => {
-		if (e.key === 'Enter') {
-			// router.push({
-			// 	pathname: '/',
-			// 	query: {
-			// 		searchInput,
-			// 		setSearchInput,
-			// 	},
-			// })
-		}
-	}
+	useEffect(() => {
+		router.push(
+			{
+				pathname: '/',
+				query: {
+					searchInput,
+				},
+			},
+			undefined,
+			{ shallow: true }
+		)
+	}, [searchInput])
 
 	return (
 		<div className="w-full mx-3 h-11 flex justify-center">
@@ -37,7 +31,6 @@ const SearchInput = () => {
 				<input
 					value={searchInput}
 					onChange={handleChang}
-					onKeyUp={handleKeyPress}
 					type="text"
 					placeholder={'Start your search'}
 					className="w-full self-center pb-1 pr-5 bg-transparent outline-none text-2xl text-black placeholder-gray-400"
