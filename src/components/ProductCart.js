@@ -1,15 +1,30 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { MdDeleteForever } from 'react-icons/md'
+import { removeFromCart } from '../app/slices/cartSlice'
+import { useRouter } from 'next/router'
 
 const ProductCart = () => {
+	const dispatch = useDispatch(removeFromCart())
 	const [paid, setPaid] = useState(0)
+	const router = useRouter()
+
+	const removeProductItemFromCart = (id) => {
+		dispatch(removeFromCart(id))
+	}
 
 	// Extracting cart state from redux store
 	const cart = useSelector((state) => state.cart)
+	//console.log("Item cart: ", cart)
 	const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
+
 	const booksCartId = cart.map((book) => book.id)
+	console.log('Cart Type is : ', typeof booksCartId, booksCartId)
+
+	const a = [1001, 1002, 1003]
+	console.log('a Type is : ', typeof a, a)
+
 	const promotions = useSelector((state) => state.promotions)
 	const promotion = promotions.map((p) => p)
 	const promotion1Id = promotion.map((p) => p[0].id)
@@ -17,13 +32,20 @@ const ProductCart = () => {
 		(accumulator, amount) => accumulator + amount,
 		0
 	)
+
 	const promotionHarryId = promotion.map((p) => p[0].id).toString()
 	// const promotion4Free1Id = promotion.map((p) => p[1].id).toString()
 	const [promotionHarryBookTargetIds] = promotion.map((p) => p[0].targetIds)
-	// const [promotion4Free1BookTargetIds] = promotion.map((p) => p[1].targetIds)
-	const productIntersectionPromotionHarry = booksCartId.filter((x) =>
-		promotionHarryBookTargetIds.includes(x)
+	const productIntersectionPromotionHarry = booksCartId?.filter((x) =>
+		(promotionHarryBookTargetIds || []).includes(x)
 	)
+
+	// const [promotion4Free1BookTargetIds] = promotion.map((p) => p[1].targetIds)
+	// if (Array.isArray(booksCartId)) {
+	// 	const productIntersectionPromotionHarry = booksCartId.filter((x) =>
+	// 		promotionHarryBookTargetIds.includes(x)
+	// 	)
+	// }
 
 	// const productIntersectionPromotion4Free1 = booksCartId.filter((x) =>
 	// 	promotion4Free1BookTargetIds.includes(x)
@@ -78,7 +100,7 @@ const ProductCart = () => {
 	const getDiscount = () => {
 		if (booksCartId.length != 0) {
 			if (promotionHarryId === '9001') {
-				console.log(' calculateHarry')
+				//console.log(' calculateHarry')
 				if (productIntersectionPromotionHarry) {
 					const discount = 0
 					switch (productIntersectionPromotionHarry.length) {
@@ -124,9 +146,19 @@ const ProductCart = () => {
 	}
 
 	return (
-		<div className="max-w-7xl mx-auto mb-10">
+		<div className="max-w-7xl mx-auto">
 			{cart.length === 0 ? (
-				<h1>Your Cart is Empty!</h1>
+				<div className="flex flex-col mt-60 items-center justify-center gap-4">
+					<h2 className="flex text-center justify-center">
+						Your Cart is Empty!
+					</h2>
+					<button
+						onClick={() => router.replace('/')}
+						className="button p-4 font-bold"
+					>
+						Shop Now
+					</button>
+				</div>
 			) : (
 				<>
 					{/* mobile */}
@@ -140,7 +172,7 @@ const ProductCart = () => {
 							cart.map((item) => (
 								<div key={item.id}>
 									<div className="flex justify-between h-20 items-center last:mb-5 md:border-none">
-										<div className="flex w-full h-full items-center ml-2 mr-1">
+										<div className="flex w-96 sm:w-full h-full items-center ml-2">
 											<div className="mr-2 h-full w-20 sm:h-full relative  overflow-hidden rounded-md">
 												<Image
 													layout="fill"
@@ -150,17 +182,23 @@ const ProductCart = () => {
 													src={item.images.jpeg}
 												/>
 											</div>
-											<div className="w-64 xs:w-[24rem] sm:w-[28rem]">
-												<h4 className="title" title={item.title}>
+											<div className="w-full xs:w-[24rem] sm:w-[28rem]">
+												<h4
+													className="title w-40 xs:w-80 sm:w-full"
+													title={item.title}
+												>
 													{item.title}
 												</h4>
 												<h4>{item.price}</h4>
 											</div>
 										</div>
 										<div>
-											<div className="w-10 sm:w-20 sm:h-full text-center ">
-												<MdDeleteForever className="w-full h-12" />
-											</div>
+											<MdDeleteForever
+												onClick={() =>
+													removeProductItemFromCart(item.id)
+												}
+												className="w-full h-12 cursor-pointer"
+											/>
 											<div className="w-full h-full text-xl font-bold text-center ">
 												{item.quantity}
 											</div>
@@ -242,9 +280,12 @@ const ProductCart = () => {
 												</h4>
 											</td>
 											<td className="left-0">
-												<h4>
-													<MdDeleteForever className="w-full h-36" />
-												</h4>
+												<MdDeleteForever
+													onClick={() =>
+														removeProductItemFromCart(item.id)
+													}
+													className="w-full h-full cursor-pointer"
+												/>
 											</td>
 										</tr>
 									</tbody>
