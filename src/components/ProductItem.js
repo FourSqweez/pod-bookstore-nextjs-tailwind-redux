@@ -63,7 +63,8 @@ const ProductItem = ({ booksAndQuantity, product }) => {
 				<div className="flex w-full justify-center gap-4 sm:my-1 items-center">
 					<button
 						onClick={() => decrementQuantity(product.id)}
-						className="w-10 h-full rounded-l-lg"
+						disabled={itemQuantity === 0 ? true : false}
+						className="w-10 h-full rounded-l-lg disabled:opacity-60"
 					>
 						<p className="text-xl font-bold pb-1">-</p>
 					</button>
@@ -81,7 +82,8 @@ const ProductItem = ({ booksAndQuantity, product }) => {
 
 				<button
 					onClick={() => addProductItemToCart(product)}
-					className="p-0.5 mt-2 sm:mt-0 sm:p-2 rounded-md w-full sm:h-10 bg-[#aff892]"
+					className="p-0.5 mt-2 sm:mt-0 sm:p-2 rounded-md w-full sm:h-10 bg-[#aff892] disabled:opacity-70 disabled:bg-red-400"
+					disabled={itemQuantity === 0 ? true : false}
 				>
 					<p className="text-[11px] sm:text-lg text-[#212b38]">
 						Add to cart
