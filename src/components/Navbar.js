@@ -26,6 +26,8 @@ const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 	)
 })
 
+CartButton.displayName = 'CartButton'
+
 const Navbar = () => {
 	const router = useRouter()
 	return (
