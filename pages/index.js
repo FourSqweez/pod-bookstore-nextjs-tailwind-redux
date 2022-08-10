@@ -23,8 +23,6 @@ export default function Home({ books, promotions }) {
 		}
 	}, [searchInput])
 
-	console.log('New book :', newBook)
-
 	useEffect(() => {
 		dispatch(addPromotions(promotions))
 	}, [1])
