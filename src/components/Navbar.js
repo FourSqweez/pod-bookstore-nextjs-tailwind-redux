@@ -16,7 +16,7 @@ const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 			onClick={onClick}
 			className="relative clicked h-full mr-2 sm:mr-10 flex w-16 cursor-pointer "
 		>
-			<span className="absolute bottom-1 right-1 h-6 w-6 bg-[#9dcaf8] text-center rounded-full text-black font-bold">
+			<span className="absolute bottom-1 pt-1 right-1 h-8 w-8 bg-[#ffbb8a] text-center rounded-full text-black font-bold">
 				{totalAmounts === 0 ? 0 : totalAmounts}
 			</span>
 			<a href={href} ref={ref} className="w-16">
@@ -37,10 +37,16 @@ const Navbar = () => {
 					</h3>
 				</Link>
 			</div>
-			{router && router.asPath == '/checkout' ? '' : <SearchInput />}
-			<Link href="/checkout" passHref>
-				<CartButton />
-			</Link>
+			{router && router.asPath == '/checkout' ? (
+				''
+			) : (
+				<>
+					<SearchInput />
+					<Link href="/checkout" passHref>
+						<CartButton />
+					</Link>
+				</>
+			)}
 		</div>
 	)
 }
