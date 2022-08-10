@@ -21,11 +21,11 @@ export default function Home({ books, promotions }) {
 		} else if (searchInput === '' || searchInput === undefined) {
 			setNewBook([])
 		}
-	}, [searchInput])
+	}, [searchInput, books])
 
 	useEffect(() => {
 		dispatch(addPromotions(promotions))
-	}, [1])
+	}, [dispatch, promotions])
 
 	return (
 		<div className="mx-1 sm:mx-10 mb-16">
