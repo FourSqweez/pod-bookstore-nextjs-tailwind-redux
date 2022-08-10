@@ -29,6 +29,7 @@ const SearchInput = () => {
 			<div className="flex max-w-3xl w-full items-center border-2 border-black rounded-xl py-1 md:shadow-sm">
 				<FaSearch className="w-8 md:inline-flex h-8 text-gray-400 rounded-full p-2 mx-2" />
 				<input
+					pattern="/[^A-Za-z0-9_.]/"
 					value={searchInput}
 					onChange={handleChang}
 					type="text"
