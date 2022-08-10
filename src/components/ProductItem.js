@@ -10,14 +10,12 @@ const ProductItem = ({ booksAndQuantity, product }) => {
 	const addProductItemToCart = () => {
 		product = { ...product, quantity: itemQuantity }
 		dispatch(addToCart(product))
-		console.log('Product And Quantity :', product)
 	}
 
 	const incrementQuantity = (id) => {
 		const item = booksAndQuantity.find((product) => product.id === id)
 		const newBooks = [{ ...item.quantity, quantity: (item.quantity += 1) }]
 		const [itemQuantity] = newBooks.map((item) => item.quantity)
-		console.log('NewBooks Quantity : ', id, typeof itemQuantity, itemQuantity)
 		setItemQuantity(itemQuantity)
 		return newBooks.quantity
 	}
@@ -26,7 +24,6 @@ const ProductItem = ({ booksAndQuantity, product }) => {
 		const item = booksAndQuantity.find((product) => product.id === id)
 		const newBooks = [{ ...item.quantity, quantity: (item.quantity -= 1) }]
 		const [itemQuantity] = newBooks.map((item) => item.quantity)
-		console.log('NewBooks Quantity : ', id, typeof itemQuantity, itemQuantity)
 		setItemQuantity(itemQuantity)
 
 		return newBooks.quantity
