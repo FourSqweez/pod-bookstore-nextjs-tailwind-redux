@@ -7,14 +7,10 @@ import SearchInput from './SearchInput'
 
 const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 	const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
-
 	const totalAmounts = quantity.reduce(
 		(accumulator, amount) => accumulator + amount,
 		0
 	)
-	console.log(`Total amount : ${totalAmounts}`)
-
-	console.log('quantity ', quantity)
 	return (
 		<div
 			onClick={onClick}
@@ -32,9 +28,6 @@ const CartButton = React.forwardRef(({ onClick, href }, ref) => {
 
 const Navbar = () => {
 	const router = useRouter()
-	const cart = useSelector((state) => state.cart)
-	console.log('Router :', router.asPath)
-
 	return (
 		<div className="flex h-16 w-full mt-5 mb-7 sm:justify-between items-center justify-end">
 			<div className="hidden sm:flex ml-10 whitespace-nowrap cursor-pointer">
