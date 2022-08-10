@@ -6,32 +6,27 @@ import { addToCart } from '../app/slices/cartSlice'
 const ProductItem = ({ booksAndQuantity, product }) => {
 	const dispatch = useDispatch()
 	const [itemQuantity, setItemQuantity] = useState(0)
-	const productAndQuantity = {}
 
 	const addProductItemToCart = () => {
+		product = { ...product, quantity: itemQuantity }
 		dispatch(addToCart(product))
+		console.log('Product And Quantity :', product)
 	}
 
 	const incrementQuantity = (id) => {
 		const item = booksAndQuantity.find((product) => product.id === id)
-		console.log('PId : ', id)
 		const newBooks = [{ ...item.quantity, quantity: (item.quantity += 1) }]
 		const [itemQuantity] = newBooks.map((item) => item.quantity)
-		productAndQuantity = { ...product, quantity: itemQuantity }
-		console.log('NewBooks Quantity : ', typeof itemQuantity, itemQuantity)
+		console.log('NewBooks Quantity : ', id, typeof itemQuantity, itemQuantity)
 		setItemQuantity(itemQuantity)
-		console.log('ProductAndQuantity : ', productAndQuantity)
 		return newBooks.quantity
 	}
 
 	const decrementQuantity = (id) => {
 		const item = booksAndQuantity.find((product) => product.id === id)
-		console.log('PId : ', id)
 		const newBooks = [{ ...item.quantity, quantity: (item.quantity -= 1) }]
 		const [itemQuantity] = newBooks.map((item) => item.quantity)
-		productAndQuantity = { ...product, quantity: itemQuantity }
-		console.log('NewBooks Quantity : ', typeof itemQuantity, itemQuantity)
-		console.log('ProductAndQuantity : ', productAndQuantity)
+		console.log('NewBooks Quantity : ', id, typeof itemQuantity, itemQuantity)
 		setItemQuantity(itemQuantity)
 
 		return newBooks.quantity
