@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MdDeleteForever } from 'react-icons/md'
 import { removeFromCart } from '../app/slices/cartSlice'
 import { useRouter } from 'next/router'
+import BackDrop from './BackDrop'
 
 const ProductCart = () => {
 	const dispatch = useDispatch(removeFromCart())
 	const [paid, setPaid] = useState(0)
 	const router = useRouter()
+	const [backdropIsOpen, setBackdropIsOpen] = useState(false)
+	console.log('Back Drop : ', backdropIsOpen)
 
 	const removeProductItemFromCart = (id) => {
 		dispatch(removeFromCart(id))
@@ -20,10 +23,10 @@ const ProductCart = () => {
 	const quantity = useSelector((state) => state.cart.map((q) => q.quantity))
 
 	const booksCartId = cart.map((book) => book.id)
-	console.log('Cart Type is : ', typeof booksCartId, booksCartId)
+	//console.log('Cart Type is : ', typeof booksCartId, booksCartId)
 
 	const a = [1001, 1002, 1003]
-	console.log('a Type is : ', typeof a, a)
+	//console.log('a Type is : ', typeof a, a)
 
 	const promotions = useSelector((state) => state.promotions)
 	const promotion = promotions.map((p) => p)
@@ -39,6 +42,10 @@ const ProductCart = () => {
 	const productIntersectionPromotionHarry = booksCartId?.filter((x) =>
 		(promotionHarryBookTargetIds || []).includes(x)
 	)
+
+	const handleBackDrop = () => {
+		setBackdropIsOpen(true)
+	}
 
 	// const [promotion4Free1BookTargetIds] = promotion.map((p) => p[1].targetIds)
 	// if (Array.isArray(booksCartId)) {
@@ -146,186 +153,211 @@ const ProductCart = () => {
 	}
 
 	return (
-		<div className="max-w-7xl mx-auto">
-			{cart.length === 0 ? (
-				<div className="flex flex-col mt-60 items-center justify-center gap-4">
-					<h2 className="flex text-center justify-center">
-						Your Cart is Empty!
-					</h2>
-					<button
-						onClick={() => router.replace('/')}
-						className="button p-4 font-bold"
-					>
-						Shop Now
-					</button>
-				</div>
+		<>
+			{backdropIsOpen === true ? (
+				<BackDrop
+					setBackdropIsOpen={setBackdropIsOpen}
+					backdropIsOpen={backdropIsOpen}
+				/>
 			) : (
-				<>
-					{/* mobile */}
-					<div className="md:hidden mt-10 min-w-[280px] sm:mx-10 grid grid-cols-1 mx-2">
-						<p className="underline font-bold text-3xl text-center mb-5">
-							Cart Summary
-						</p>
+				<div className="max-w-7xl mx-auto ">
+					{cart.length === 0 ? (
+						<div className="flex flex-col mt-60 items-center justify-center gap-4">
+							<h2 className="flex text-center justify-center">
+								Your Cart is Empty!
+							</h2>
 
-						{/* loop */}
-						{cart &&
-							cart.map((item) => (
-								<div key={item.id}>
-									<div className="flex justify-between h-20 items-center last:mb-5 md:border-none">
-										<div className="flex w-96 sm:w-full h-full items-center ml-2">
-											<div className="mr-2 h-full w-20 sm:h-full relative  overflow-hidden rounded-md">
-												<Image
-													layout="fill"
-													alt=""
-													objectFit="inherit"
-													priority
-													src={item.images.jpeg}
-												/>
-											</div>
-											<div className="w-full xs:w-[24rem] sm:w-[28rem]">
-												<h4
-													className="title w-40 xs:w-80 sm:w-full"
-													title={item.title}
-												>
-													{item.title}
-												</h4>
-												<h4>{item.price}</h4>
+							<button
+								onClick={() => router.replace('/')}
+								className="button p-4 font-bold"
+							>
+								Shop Now
+							</button>
+						</div>
+					) : (
+						<>
+							{/* mobile */}
+							<div className="md:hidden mt-10 min-w-[280px] sm:mx-10 grid grid-cols-1 mx-2">
+								<p className="underline font-bold text-3xl text-center mb-5">
+									Cart Summary
+								</p>
+
+								{/* loop */}
+								{cart &&
+									cart.map((item) => (
+										<div key={item.id}>
+											<div className="flex justify-between h-20 items-center last:mb-5 md:border-none">
+												<div className="flex w-96 sm:w-full h-full items-center ml-2">
+													<div className="mr-2 h-full w-20 sm:h-full relative  overflow-hidden rounded-md">
+														<Image
+															layout="fill"
+															alt=""
+															objectFit="inherit"
+															priority
+															src={item.images.jpeg}
+														/>
+													</div>
+													<div className="w-full xs:w-[24rem] sm:w-[28rem]">
+														<h4
+															className="title w-40 xs:w-80 sm:w-full"
+															title={item.title}
+														>
+															{item.title}
+														</h4>
+														<h4>{item.price}</h4>
+													</div>
+												</div>
+												<div>
+													<MdDeleteForever
+														onClick={() =>
+															removeProductItemFromCart(item.id)
+														}
+														className="w-full h-12 cursor-pointer"
+													/>
+													<div className="w-full h-full text-xl font-bold text-center ">
+														{item.quantity}
+													</div>
+												</div>
 											</div>
 										</div>
-										<div>
-											<MdDeleteForever
-												onClick={() =>
-													removeProductItemFromCart(item.id)
-												}
-												className="w-full h-12 cursor-pointer"
-											/>
-											<div className="w-full h-full text-xl font-bold text-center ">
-												{item.quantity}
-											</div>
-										</div>
+									))}
+								{/* end loop */}
+								<hr />
+								<div className="flex justify-between ">
+									<div className="flex flex-col items-end gap-2 w-full pr-3">
+										<h3 className="">Special Discount : </h3>
+										<h3 className=" ">Summary : </h3>
+										<h3 className="">Paid : </h3>
+										<h3 className=" ">Change : </h3>
+									</div>
+									<div className="flex flex-col items-end gap-2 w-auto mr-3">
+										<h3>40</h3>
+										<h3>560</h3>
+										<input
+											className="w-20 px-2 rounded-sm"
+											type="text"
+										/>
+										<h3>440</h3>
 									</div>
 								</div>
-							))}
-						{/* end loop */}
-						<hr />
-						<div className="flex justify-between ">
-							<div className="flex flex-col items-end gap-2 w-full pr-3">
-								<h3 className="">Special Discount : </h3>
-								<h3 className=" ">Summary : </h3>
-								<h3 className="">Paid : </h3>
-								<h3 className=" ">Change : </h3>
+								<div className="flex justify-end mt-3 ">
+									<button
+										onClick={() => handleBackDrop()}
+										className="rounded-md px-6 py-1.5"
+									>
+										Checkout
+									</button>
+								</div>
 							</div>
-							<div className="flex flex-col items-end gap-2 w-auto mr-3">
-								<h3>40</h3>
-								<h3>560</h3>
-								<input className="w-20 px-2 rounded-sm" type="text" />
-								<h3>440</h3>
-							</div>
-						</div>
-						<div className="flex justify-end mt-3 ">
-							<button className="rounded-md px-6 py-1.5">
-								Checkout
-							</button>
-						</div>
-					</div>
 
-					{/* desktop */}
-					<div className="hidden md:flex flex-col mx-10 mt-10">
-						<div className="w-full">
-							<p className="underline font-bold  text-3xl mb-5 ">
-								Cart Summary
-							</p>
-						</div>
+							{/* desktop */}
+							<div className="hidden md:flex flex-col mx-10 mt-10">
+								<div className="w-full">
+									<p className="underline font-bold  text-3xl mb-5 ">
+										Cart Summary
+									</p>
+								</div>
 
-						<table className="table-auto text-left">
-							<thead>
-								<tr>
-									<th className="w-24 text-xl">Product</th>
-									<th className="w-24 text-xl">Price</th>
-									<th className="w-24 text-xl">Amount</th>
-									<th className="w-26 text-xl">Total Price</th>
-									<th className="w-16 text-xl"></th>
-								</tr>
-							</thead>
-							{cart &&
-								cart.map((item) => (
-									<tbody key={item.id}>
+								<table className="table-auto text-left">
+									<thead>
 										<tr>
-											<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
-												<div className="h-36 w-40 text-2xl relative  overflow-hidden rounded-xl">
-													<Image
-														src={item.images.jpeg}
-														layout="fill"
-														alt=""
-														objectFit="inherit"
-														priority
-													/>
-												</div>
-												<h4
-													className="w-full pl-2 items-center title text-2xl"
-													title={item.title}
-												>
-													{item.title}
-												</h4>
-											</td>
-											<td>
-												<h4 className="text-xl">{item.price}</h4>
-											</td>
-											<td>
-												<h4 className="text-xl">{item.quantity}</h4>
-											</td>
-											<td className="">
-												<h4 className="text-xl">
-													{item.quantity * item.price}
-												</h4>
-											</td>
-											<td className="left-0">
-												<MdDeleteForever
-													onClick={() =>
-														removeProductItemFromCart(item.id)
-													}
-													className="w-full h-full cursor-pointer"
-												/>
-											</td>
+											<th className="w-24 text-xl">Product</th>
+											<th className="w-24 text-xl">Price</th>
+											<th className="w-24 text-xl">Amount</th>
+											<th className="w-26 text-xl">Total Price</th>
+											<th className="w-16 text-xl"></th>
 										</tr>
-									</tbody>
-								))}
-						</table>
+									</thead>
+									{cart &&
+										cart.map((item) => (
+											<tbody key={item.id}>
+												<tr>
+													<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
+														<div className="h-36 w-40 text-2xl relative  overflow-hidden rounded-xl">
+															<Image
+																src={item.images.jpeg}
+																layout="fill"
+																alt=""
+																objectFit="inherit"
+																priority
+															/>
+														</div>
+														<h4
+															className="w-full pl-2 items-center title text-2xl"
+															title={item.title}
+														>
+															{item.title}
+														</h4>
+													</td>
+													<td>
+														<h4 className="text-xl">
+															{item.price}
+														</h4>
+													</td>
+													<td>
+														<h4 className="text-xl">
+															{item.quantity}
+														</h4>
+													</td>
+													<td className="">
+														<h4 className="text-xl">
+															{item.quantity * item.price}
+														</h4>
+													</td>
+													<td className="left-0">
+														<MdDeleteForever
+															onClick={() =>
+																removeProductItemFromCart(
+																	item.id
+																)
+															}
+															className="w-full h-full cursor-pointer"
+														/>
+													</td>
+												</tr>
+											</tbody>
+										))}
+								</table>
 
-						<hr />
+								<hr />
 
-						<div className="flex justify-between">
-							<div className="flex flex-col items-end gap-2 w-full pr-12">
-								<h3 className="text-2xl">Total : </h3>
-								<h3 className="text-2xl">Special Discount : </h3>
-								<h3 className="text-2xl">Summary : </h3>
-								<h3 className="text-2xl">Paid : </h3>
-								<h3 className="text-2xl">Change : </h3>
+								<div className="flex justify-between">
+									<div className="flex flex-col items-end gap-2 w-full pr-12">
+										<h3 className="text-2xl">Total : </h3>
+										<h3 className="text-2xl">Special Discount : </h3>
+										<h3 className="text-2xl">Summary : </h3>
+										<h3 className="text-2xl">Paid : </h3>
+										<h3 className="text-2xl">Change : </h3>
+									</div>
+									<div className="flex flex-col items-end gap-2 w-auto mr-3">
+										<h3 className="text-2xl">{getTotalPrice()}</h3>
+										<h3 className="text-2xl">{getDiscount()}%</h3>
+										<h3 className="text-2xl">{getSummary()}</h3>
+										<input
+											onChange={handlePaid}
+											className="w-24 px-2 rounded-sm border-2 border-gray-400"
+											type="text"
+										/>
+										<h3 className="text-2xl">
+											{paid === 0 ? 0 : getChang()}
+										</h3>
+									</div>
+								</div>
+
+								<div className="flex justify-end mt-3 ">
+									<button
+										onClick={() => handleBackDrop()}
+										className="rounded-md px-6 py-1.5"
+									>
+										Checkout
+									</button>
+								</div>
 							</div>
-							<div className="flex flex-col items-end gap-2 w-auto mr-3">
-								<h3 className="text-2xl">{getTotalPrice()}</h3>
-								<h3 className="text-2xl">{getDiscount()}%</h3>
-								<h3 className="text-2xl">{getSummary()}</h3>
-								<input
-									onChange={handlePaid}
-									className="w-24 px-2 rounded-sm border-2 border-gray-400"
-									type="text"
-								/>
-								<h3 className="text-2xl">
-									{paid === 0 ? 0 : getChang()}
-								</h3>
-							</div>
-						</div>
-
-						<div className="flex justify-end mt-3 ">
-							<button className="rounded-md px-6 py-1.5">
-								Checkout
-							</button>
-						</div>
-					</div>
-				</>
+						</>
+					)}
+				</div>
 			)}
-		</div>
+		</>
 	)
 }
 
