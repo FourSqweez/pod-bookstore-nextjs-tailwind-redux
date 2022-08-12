@@ -47,7 +47,9 @@ html {
 		@apply active:scale-95 transition duration-150;
 	}
 	button {
-		@apply clicked shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#94ed97] hover:shadow-xl ;
+		@apply clicked shadow-sm shadow-gray-400 uppercase text-[#212b38] bg-[#94ed97] hover:shadow-xl;
 	}
-
+	.back-drop {
+		@apply fixed right-0 left-0 top-0 w-full h-screen bg-black/70 -z-10
+	}
 }
