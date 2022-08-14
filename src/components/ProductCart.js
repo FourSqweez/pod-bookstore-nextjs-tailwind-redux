@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MdDeleteForever } from 'react-icons/md'
 import { removeFromCart } from '../app/slices/cartSlice'
 import { useRouter } from 'next/router'
-import BackDrop from './BackDrop'
+import Bill from './Bill'
 
 const ProductCart = () => {
 	const dispatch = useDispatch(removeFromCart())
@@ -155,7 +155,7 @@ const ProductCart = () => {
 	return (
 		<>
 			{backdropIsOpen === true ? (
-				<BackDrop
+				<Bill
 					setBackdropIsOpen={setBackdropIsOpen}
 					backdropIsOpen={backdropIsOpen}
 				/>

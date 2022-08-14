@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 
-const BackDrop = ({ setBackdropIsOpen }) => {
+const Bill = ({ setBackdropIsOpen }) => {
 	const router = useRouter()
 	return (
 		<>
@@ -39,4 +39,4 @@ const BackDrop = ({ setBackdropIsOpen }) => {
 	)
 }
 
-export default BackDrop
+export default Bill
