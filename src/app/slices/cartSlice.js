@@ -19,14 +19,16 @@ export const cartSlice = createSlice({
 			const index = state.findIndex((item) => item.id === action.payload)
 			state.splice(index, 1)
 		},
+		removeAll: (state) => {
+			if (state.length > 0) {
+				state.splice(0, state.length)
+			}
+		},
 	},
 })
 export const cartReducer = cartSlice.reducer
 
-export const {
-	addToCart,
-	removeFromCart,
-} = cartSlice.actions
+export const { addToCart, removeFromCart, removeAll } = cartSlice.actions
 
 export const selectBooks = (state) => state.cart.booksItems
 export const selectTotal = function (state) {
