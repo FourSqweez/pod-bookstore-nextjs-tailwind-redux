@@ -153,11 +153,16 @@ const ProductCart = () => {
 	}
 
 	return (
-		<>
+		<div className="pb-10">
 			{backdropIsOpen === true ? (
 				<Bill
 					setBackdropIsOpen={setBackdropIsOpen}
 					backdropIsOpen={backdropIsOpen}
+					getTotalPrice={getTotalPrice}
+					getSummary={getSummary}
+					getDiscount={getDiscount}
+					paid={paid}
+					getChang={getChang}
 				/>
 			) : (
 				<div className="max-w-7xl mx-auto ">
@@ -357,7 +362,7 @@ const ProductCart = () => {
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	)
 }
 
