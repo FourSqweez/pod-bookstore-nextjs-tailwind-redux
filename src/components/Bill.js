@@ -14,6 +14,13 @@ const Bill = ({
 	const cart = useSelector((state) => state.cart)
 	const dispatch = useDispatch()
 	const router = useRouter()
+	const handleBack = () => {
+		router.replace('/')
+		setTimeout(() => {
+			setBackdropIsOpen(false)
+			dispatch(removeAll())
+		}, 500)
+	}
 	return (
 		<>
 			<div className="back-drop" />
@@ -40,7 +47,7 @@ const Bill = ({
 											<div className="w-full text-end">
 												{item.price}
 											</div>
-											<div className="w-full text-end pr-2">
+											<div className="w-full text-end ">
 												{item.quantity}
 											</div>
 											<div className="w-full text-end">
@@ -51,7 +58,7 @@ const Bill = ({
 								))}
 							<hr />
 
-							<div className="flex justify-end gap-28">
+							<div className="flex justify-end gap-20">
 								<div className="flex flex-col items-end w-full">
 									<h4>Total :</h4>
 									<h4>Discount :</h4>
@@ -69,11 +76,7 @@ const Bill = ({
 							</div>
 							<div className="flex justify-center mt-14">
 								<button
-									onClick={() => {
-										router.replace('/')
-										setBackdropIsOpen(false)
-										dispatch(removeAll())
-									}}
+									onClick={() => handleBack()}
 									className="button w-40 p-3"
 								>
 									back to shop
