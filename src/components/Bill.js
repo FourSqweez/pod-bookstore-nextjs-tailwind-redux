@@ -39,7 +39,10 @@ const Bill = ({
 						<div className=" flex h-auto pb-2 flex-col justify-between">
 							{cart &&
 								cart.map((item) => (
-									<div className="flex h-full justify-between">
+									<div
+										key={item.id}
+										className="flex h-full justify-between"
+									>
 										<div className="w-full title" title={item.title}>
 											{item.title}
 										</div>
