@@ -96,12 +96,12 @@ const ProductCart = () => {
 	}
 
 	const getTotalPrice = () => {
-		return cart
-			.reduce(
+		return parseFloat(
+			cart.reduce(
 				(accumulator, item) => accumulator + item.quantity * item.price,
 				0
 			)
-			.toFixed(2)
+		)
 	}
 
 	const getDiscount = () => {
@@ -142,14 +142,11 @@ const ProductCart = () => {
 	// const get4Free1 = () => {}
 
 	const getSummary = () => {
-		return (
-			getTotalPrice() -
-			(getTotalPrice() * getDiscount()) / 100
-		).toFixed(2)
+		return getTotalPrice() - (getTotalPrice() * getDiscount()) / 100
 	}
 
 	const getChang = () => {
-		return (paid - getSummary()).toFixed(2)
+		return parseFloat(paid - getSummary()).toFixed(2)
 	}
 
 	return (
@@ -230,25 +227,29 @@ const ProductCart = () => {
 								<hr />
 								<div className="flex justify-between ">
 									<div className="flex flex-col items-end gap-2 w-full pr-3">
-										<h3 className="">Special Discount : </h3>
-										<h3 className=" ">Summary : </h3>
-										<h3 className="">Paid : </h3>
-										<h3 className=" ">Change : </h3>
+										<h3>Total : </h3>
+										<h3>Special Discount : </h3>
+										<h3>Summary : </h3>
+										<h3>Paid : </h3>
+										<h3>Change : </h3>
 									</div>
-									<div className="flex flex-col items-end gap-2 w-auto mr-3">
-										<h3>40</h3>
-										<h3>560</h3>
+									<div className="flex flex-col items-end gap-2 w-auto mr-3 justify-between">
+										<h3>{getTotalPrice()}</h3>
+										<h3>{getDiscount()}</h3>
+										<h3>{getSummary()}</h3>
 										<input
-											className="w-20 px-2 rounded-sm"
+											onChange={handlePaid}
+											className="w-20 px-2 rounded-sm text-xl border-2 border-gray-400"
 											type="text"
 										/>
-										<h3>440</h3>
+										<h3>{getChang()}</h3>
 									</div>
 								</div>
 								<div className="flex justify-end mt-3 ">
 									<button
 										onClick={() => handleBackDrop()}
-										className="rounded-md px-6 py-1.5"
+										className="rounded-md px-6 py-1.5 disabled:opacity-70 disabled:bg-red-400"
+										disabled={paid >= getSummary() ? false : true}
 									>
 										Checkout
 									</button>
@@ -340,7 +341,7 @@ const ProductCart = () => {
 										<h3 className="text-2xl">{getSummary()}</h3>
 										<input
 											onChange={handlePaid}
-											className="w-24 px-2 rounded-sm border-2 border-gray-400"
+											className="w-24 px-2 rounded-sm border-2 border-gray-400 text-xl"
 											type="text"
 										/>
 										<h3 className="text-2xl">
@@ -352,7 +353,8 @@ const ProductCart = () => {
 								<div className="flex justify-end mt-3 ">
 									<button
 										onClick={() => handleBackDrop()}
-										className="rounded-md px-6 py-1.5"
+										className="rounded-md px-6 py-1.5 disabled:opacity-70 disabled:bg-red-400"
+										disabled={paid >= getSummary() ? false : true}
 									>
 										Checkout
 									</button>
