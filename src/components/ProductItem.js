@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../app/slices/cartSlice'
 
-const ProductItem = ({ booksAndQuantity, product }) => {
+const ProductItem = ({ booksAndQuantity, product, handleModal }) => {
 	const dispatch = useDispatch()
 	const [itemQuantity, setItemQuantity] = useState(0)
 
@@ -33,9 +33,12 @@ const ProductItem = ({ booksAndQuantity, product }) => {
 		<>
 			<div
 				key={product.id}
-				className="w-40 h-full border-2 hover:border-[#F692B2] bg-[#ffd580] sm:w-48 sm:h-full overflow-hidden rounded-xl hover:opacity-100 hover:shadow-slate-200 hover:shadow-lg hover:scale-110 duration-200 ease-ou"
+				className="w-40 h-full border-2 hover:border-[#F692B2] bg-[#ffd580] sm:w-48 sm:h-full overflow-hidden rounded-xl hover:opacity-100 hover:shadow-slate-200 hover:shadow-lg hover:scale-110 duration-200 ease-out"
 			>
-				<div className="h-52 w-full sm:h-60 sm:w-full relative overflow-hidden rounded-t-xl">
+				<div
+					onClick={() => handleModal(product.id)}
+					className="h-52 w-full sm:h-60 sm:w-full relative overflow-hidden rounded-t-xl cursor-pointer"
+				>
 					<Image
 						src={product.images.jpeg}
 						layout="fill"
