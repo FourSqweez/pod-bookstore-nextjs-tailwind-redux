@@ -33,7 +33,7 @@ const Navbar = () => {
 	const router = useRouter()
 	const { isModalOpen } = useContext(ModalContext)
 	return (
-		<>
+		<div className="mx-auto">
 			{isModalOpen ? (
 				''
 			) : (
@@ -63,7 +63,7 @@ const Navbar = () => {
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	)
 }
 
