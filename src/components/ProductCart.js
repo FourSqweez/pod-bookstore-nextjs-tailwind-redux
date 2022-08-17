@@ -179,18 +179,17 @@ const ProductCart = () => {
 							</button>
 						</div>
 					) : (
-						<>
+						<div className=" mx-2">
 							{/* mobile */}
-							<div className="md:hidden min-w-[280px] sm:mx-10 grid grid-cols-1 mx-2">
+							<div className="md:hidden min-w-[280px] sm:mx-10">
 								<p className="underline font-bold text-3xl text-center mb-5">
 									Cart Summary
 								</p>
-
 								{/* loop */}
 								{cart &&
 									cart.map((item) => (
 										<div key={item.id}>
-											<div className="flex justify-between h-20 items-center last:mb-5 md:border-none">
+											<div className="flex justify-between h-20 items-center last:mb-5">
 												<div className="flex w-96 sm:w-full h-full items-center ml-2">
 													<div className="mr-2 h-full w-20 sm:h-full relative  overflow-hidden rounded-md">
 														<Image
@@ -201,7 +200,7 @@ const ProductCart = () => {
 															src={item.images.jpeg}
 														/>
 													</div>
-													<div className="w-full xs:w-[24rem] sm:w-[28rem]">
+													<div className="xs:w-[24rem] w-[28rem]">
 														<h4
 															className="title w-40 xs:w-80 sm:w-full"
 															title={item.title}
@@ -226,42 +225,12 @@ const ProductCart = () => {
 										</div>
 									))}
 								{/* end loop */}
-								<hr />
-								<div className="flex justify-between ">
-									<div className="flex flex-col items-end gap-2 w-full pr-3">
-										<h3>Total : </h3>
-										<h3>Special Discount : </h3>
-										<h3>Summary : </h3>
-										<h3>Paid : </h3>
-										<h3>Change : </h3>
-									</div>
-									<div className="flex flex-col items-end gap-2 w-auto mr-3 justify-between min-w-[8rem]">
-										<h3>{getTotalPrice()}</h3>
-										<h3>{getDiscount()}</h3>
-										<h3>{getSummary()}</h3>
-										<input
-											onChange={handlePaid}
-											className="w-24 px-2 rounded-sm text-xl border-2 border-gray-400"
-											type="text"
-										/>
-										<h3>{getChang()}</h3>
-									</div>
-								</div>
-								<div className="flex justify-end mt-3 ">
-									<button
-										onClick={() => handleBackDrop()}
-										className="rounded-md px-6 py-1.5 disabled:opacity-70 disabled:bg-red-400"
-										disabled={paid >= getSummary() ? false : true}
-									>
-										Checkout
-									</button>
-								</div>
 							</div>
 
 							{/* desktop */}
-							<div className="hidden md:flex flex-col mx-10 mt-10">
+							<div className="hidden md:flex flex-col mt-10">
 								<div className="w-full">
-									<p className="underline font-bold  text-3xl mb-5 ">
+									<p className="underline font-bold text-3xl mb-5">
 										Cart Summary
 									</p>
 								</div>
@@ -272,7 +241,7 @@ const ProductCart = () => {
 											<th className="w-24 text-xl">Product</th>
 											<th className="w-24 text-xl">Price</th>
 											<th className="w-24 text-xl">Amount</th>
-											<th className="w-26 text-xl">Total Price</th>
+											<th className="w-28 text-xl">Total Price</th>
 											<th className="w-16 text-xl"></th>
 										</tr>
 									</thead>
@@ -281,7 +250,7 @@ const ProductCart = () => {
 											<tbody key={item.id}>
 												<tr>
 													<td className="flex items-center w-[20rem] lg:w-[35rem] xl:w-[45rem] 2xl:w-[50rem]">
-														<div className="h-36 w-40 text-2xl relative  overflow-hidden rounded-xl">
+														<div className="h-36 w-40 text-2xl relative overflow-hidden rounded-xl">
 															<Image
 																src={item.images.jpeg}
 																layout="fill"
@@ -326,43 +295,42 @@ const ProductCart = () => {
 											</tbody>
 										))}
 								</table>
+							</div>
 
-								<hr />
-
-								<div className="flex justify-between">
-									<div className="flex flex-col items-end gap-2 w-full pr-12">
-										<h3 className="text-2xl">Total : </h3>
-										<h3 className="text-2xl">Special Discount : </h3>
-										<h3 className="text-2xl">Summary : </h3>
-										<h3 className="text-2xl">Paid : </h3>
-										<h3 className="text-2xl">Change : </h3>
-									</div>
-									<div className="flex flex-col items-end gap-2 min-w-[10rem] w-auto">
-										<h3 className="text-2xl">{getTotalPrice()}</h3>
-										<h3 className="text-2xl">{getDiscount()}%</h3>
-										<h3 className="text-2xl">{getSummary()}</h3>
-										<input
-											onChange={handlePaid}
-											className="w-28 px-2 rounded-sm border-2 border-gray-400 text-xl"
-											type="text"
-										/>
-										<h3 className="text-2xl">
-											{paid === 0 ? 0 : getChang()}
-										</h3>
-									</div>
+							<hr />
+							<div className="flex justify-between">
+								<div className="flex flex-col items-end gap-2 w-full pr-12">
+									<h3 className="sm:text-2xl">Total : </h3>
+									<h3 className="sm:text-2xl">Special Discount : </h3>
+									<h3 className="sm:text-2xl">Summary : </h3>
+									<h3 className="sm:text-2xl">Paid : </h3>
+									<h3 className="sm:text-2xl">Change : </h3>
 								</div>
-
-								<div className="flex justify-end mt-3 ">
-									<button
-										onClick={() => handleBackDrop()}
-										className="rounded-md px-6 py-1.5 disabled:opacity-70 disabled:bg-red-400"
-										disabled={paid >= getSummary() ? false : true}
-									>
-										Checkout
-									</button>
+								<div className="flex flex-col items-end gap-2 min-w-[10rem] w-auto">
+									<h3 className="sm:text-2xl">{getTotalPrice()}</h3>
+									<h3 className="sm:text-2xl">{getDiscount()}%</h3>
+									<h3 className="sm:text-2xl">{getSummary()}</h3>
+									<input
+										onChange={handlePaid}
+										className="w-28 px-2 rounded-sm border-2 border-gray-400 text-xl"
+										type="text"
+									/>
+									<h3 className="text-2xl">
+										{paid === 0 ? 0 : getChang()}
+									</h3>
 								</div>
 							</div>
-						</>
+
+							<div className="flex justify-end mt-3 ">
+								<button
+									onClick={() => handleBackDrop()}
+									className="rounded-md px-6 py-1.5 disabled:opacity-70 disabled:bg-red-400"
+									disabled={paid >= getSummary() ? false : true}
+								>
+									Checkout
+								</button>
+							</div>
+						</div>
 					)}
 				</div>
 			)}
