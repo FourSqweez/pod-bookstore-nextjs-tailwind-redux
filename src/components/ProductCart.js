@@ -181,7 +181,7 @@ const ProductCart = () => {
 					) : (
 						<>
 							{/* mobile */}
-							<div className="md:hidden mt-10 min-w-[280px] sm:mx-10 grid grid-cols-1 mx-2">
+							<div className="md:hidden min-w-[280px] sm:mx-10 grid grid-cols-1 mx-2">
 								<p className="underline font-bold text-3xl text-center mb-5">
 									Cart Summary
 								</p>
