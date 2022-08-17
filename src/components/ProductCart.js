@@ -101,7 +101,7 @@ const ProductCart = () => {
 				(accumulator, item) => accumulator + item.quantity * item.price,
 				0
 			)
-		)
+		).toFixed(2)
 	}
 
 	const getDiscount = () => {
@@ -142,7 +142,9 @@ const ProductCart = () => {
 	// const get4Free1 = () => {}
 
 	const getSummary = () => {
-		return getTotalPrice() - (getTotalPrice() * getDiscount()) / 100
+		return parseFloat(
+			(getTotalPrice() - (getTotalPrice() * getDiscount()) / 100).toFixed(2)
+		)
 	}
 
 	const getChang = () => {
