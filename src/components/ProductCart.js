@@ -235,13 +235,13 @@ const ProductCart = () => {
 										<h3>Paid : </h3>
 										<h3>Change : </h3>
 									</div>
-									<div className="flex flex-col items-end gap-2 w-auto mr-3 justify-between">
+									<div className="flex flex-col items-end gap-2 w-auto mr-3 justify-between min-w-[8rem]">
 										<h3>{getTotalPrice()}</h3>
 										<h3>{getDiscount()}</h3>
 										<h3>{getSummary()}</h3>
 										<input
 											onChange={handlePaid}
-											className="w-20 px-2 rounded-sm text-xl border-2 border-gray-400"
+											className="w-24 px-2 rounded-sm text-xl border-2 border-gray-400"
 											type="text"
 										/>
 										<h3>{getChang()}</h3>
@@ -337,13 +337,13 @@ const ProductCart = () => {
 										<h3 className="text-2xl">Paid : </h3>
 										<h3 className="text-2xl">Change : </h3>
 									</div>
-									<div className="flex flex-col items-end gap-2 w-auto mr-3">
+									<div className="flex flex-col items-end gap-2 min-w-[10rem] w-auto">
 										<h3 className="text-2xl">{getTotalPrice()}</h3>
 										<h3 className="text-2xl">{getDiscount()}%</h3>
 										<h3 className="text-2xl">{getSummary()}</h3>
 										<input
 											onChange={handlePaid}
-											className="w-24 px-2 rounded-sm border-2 border-gray-400 text-xl"
+											className="w-28 px-2 rounded-sm border-2 border-gray-400 text-xl"
 											type="text"
 										/>
 										<h3 className="text-2xl">
