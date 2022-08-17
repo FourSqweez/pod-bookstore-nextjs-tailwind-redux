@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:8000/'
+axios.defaults.baseURL = process.env.STORE_URL
 
 export const getPromotionsAPI = async () =>
 	axios.get(`/promotions`).catch((error) => console.error(error))
