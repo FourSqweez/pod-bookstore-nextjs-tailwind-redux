@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { ModalContext } from '../context/context'
 import ContentModal from './ContentModal'
 import ProductItem from './ProductItem'
 
 const ProductsFeed = ({ books }) => {
-	const [isModalOpen, setIsModalOpen] = useState(false)
+	const { isModalOpen, setIsModalOpen } = useContext(ModalContext)
 	const [productId, setProductId] = useState()
 
 	const booksAndQuantity = books.map((book) => {
