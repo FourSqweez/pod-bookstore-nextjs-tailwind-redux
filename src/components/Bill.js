@@ -19,7 +19,7 @@ const Bill = ({
 		setTimeout(() => {
 			setBackdropIsOpen(false)
 			dispatch(removeAll())
-		}, 500)
+		}, 1000)
 	}
 	return (
 		<>
