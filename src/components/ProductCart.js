@@ -164,7 +164,7 @@ const ProductCart = () => {
 					getChang={getChang}
 				/>
 			) : (
-				<div className="max-w-7xl mx-auto ">
+				<div className="max-w-7xl mx-auto">
 					{cart.length === 0 ? (
 						<div className="flex flex-col mt-60 items-center justify-center gap-4">
 							<h2 className="flex text-center justify-center">
@@ -179,7 +179,7 @@ const ProductCart = () => {
 							</button>
 						</div>
 					) : (
-						<div className=" mx-2">
+						<div className="">
 							{/* mobile */}
 							<div className="md:hidden min-w-[280px] sm:mx-10">
 								<p className="underline font-bold text-3xl text-center mb-5">
@@ -190,8 +190,8 @@ const ProductCart = () => {
 									cart.map((item) => (
 										<div key={item.id}>
 											<div className="flex justify-between h-20 items-center last:mb-5">
-												<div className="flex w-96 sm:w-full h-full items-center ml-2">
-													<div className="mr-2 h-full w-20 sm:h-full relative  overflow-hidden rounded-md">
+												<div className="flex w-full sm:w-full h-full items-center ml-2">
+													<div className="mr-2 h-full w-20 min-w-[4rem] sm:h-full relative overflow-hidden rounded-md">
 														<Image
 															layout="fill"
 															alt=""
@@ -200,7 +200,7 @@ const ProductCart = () => {
 															src={item.images.jpeg}
 														/>
 													</div>
-													<div className="xs:w-[24rem] w-[28rem]">
+													<div className="xs:w-[24rem] w-[24rem]">
 														<h4
 															className="title w-40 xs:w-80 sm:w-full"
 															title={item.title}
@@ -209,16 +209,18 @@ const ProductCart = () => {
 														</h4>
 														<h4>{item.price}</h4>
 													</div>
-												</div>
-												<div>
-													<MdDeleteForever
-														onClick={() =>
-															removeProductItemFromCart(item.id)
-														}
-														className="w-full h-12 cursor-pointer"
-													/>
-													<div className="w-full h-full text-xl font-bold text-center ">
-														{item.quantity}
+													<div className="w-20">
+														<MdDeleteForever
+															onClick={() =>
+																removeProductItemFromCart(
+																	item.id
+																)
+															}
+															className="w-full h-12 cursor-pointer"
+														/>
+														<div className="w-full h-full text-xl font-bold text-center ">
+															{item.quantity}
+														</div>
 													</div>
 												</div>
 											</div>
