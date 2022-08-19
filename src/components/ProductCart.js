@@ -164,7 +164,7 @@ const ProductCart = () => {
 					getChang={getChang}
 				/>
 			) : (
-				<div className="max-w-7xl mx-auto">
+				<div className="max-w-7xl mx-auto px-2">
 					{cart.length === 0 ? (
 						<div className="flex flex-col mt-60 items-center justify-center gap-4">
 							<h2 className="flex text-center justify-center">
