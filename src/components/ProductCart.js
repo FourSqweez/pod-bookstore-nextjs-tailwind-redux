@@ -301,14 +301,14 @@ const ProductCart = () => {
 
 							<hr />
 							<div className="flex justify-between">
-								<div className="flex flex-col items-end gap-2 w-full pr-12">
+								<div className="flex flex-col items-end gap-2 w-full">
 									<h3 className="sm:text-2xl">Total : </h3>
 									<h3 className="sm:text-2xl">Special Discount : </h3>
 									<h3 className="sm:text-2xl">Summary : </h3>
 									<h3 className="sm:text-2xl">Paid : </h3>
 									<h3 className="sm:text-2xl">Change : </h3>
 								</div>
-								<div className="flex flex-col items-end gap-2 min-w-[10rem] w-auto">
+								<div className="flex flex-col items-end gap-2 min-w-[8rem] w-auto">
 									<h3 className="sm:text-2xl">{getTotalPrice()}</h3>
 									<h3 className="sm:text-2xl">{getDiscount()}%</h3>
 									<h3 className="sm:text-2xl">{getSummary()}</h3>
